@@ -1,0 +1,9 @@
+@comment $NetBSD$
+man/man8/cgdisk.8
+man/man8/fixparts.8
+man/man8/gdisk.8
+man/man8/sgdisk.8
+sbin/cgdisk
+sbin/fixparts
+sbin/gdisk
+sbin/sgdisk
