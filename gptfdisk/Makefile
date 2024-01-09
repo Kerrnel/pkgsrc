@@ -17,7 +17,7 @@ USE_LANGUAGES=	c c++
 USE_LIBTOOL=	yes
 USE_TOOLS+=	gmake c++
 
-INSTALLATION_DIRS=	sbin ${PKGMANDIR}/man8
+INSTALLATION_DIRS=	sbin ${PREFIX}/${PKGMANDIR}
 
 SBIN_FILES+=	gdisk cgdisk sgdisk fixparts
 MAN_FILES+=	gdisk.8 cgdisk.8 sgdisk.8 fixparts.8
@@ -29,7 +29,7 @@ do-install:
 	${INSTALL_PROGRAM} ${WRKSRC}/${f} ${DESTDIR}${PREFIX}/sbin/${f}
 .endfor
 .for f in ${MAN_FILES}
-	${INSTALL_DATA} ${WRKSRC}/${f} ${DESTDIR}${PREFIX}/man/man8/${f}
+	${INSTALL_DATA} ${WRKSRC}/${f} ${DESTDIR}${PREFIX}/${PKGMANDIR}/${f}
 .endfor
 
 .include "../../devel/libuuid/buildlink3.mk"
