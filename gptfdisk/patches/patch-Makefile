@@ -18,7 +18,7 @@ NetBSD target added
    LDFLAGS+=-L/usr/local/lib
    LDLIBS+=-luuid #-licuio
 +else ifeq ($(TARGET),netbsd)
-+  CXXFLAGS+=-O2 -Wall -D_FILE_OFFSET_BITS=64 -I /usr/pkg/include
++  CXXFLAGS+=-O2 -Wall -D_FILE_OFFSET_BITS=64
 +  LDFLAGS+=-L/usr/pkg/lib
 +  LDLIBS+=-luuid
  else ifeq ($(TARGET),macos)

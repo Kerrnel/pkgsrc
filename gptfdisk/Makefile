@@ -4,7 +4,7 @@ DISTNAME=	gptfdisk-1.0.9
 PKGREVISION=	1
 CATEGORIES=	sysutils
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=gptfdisk/1.0.9/}
-EXTRACT_SUFX=	.tar.gz
+# EXTRACT_SUFX=	.tar.gz
 
 MAINTAINER=		greg-org-netbsd@akua.com
 HOMEPAGE=		https://www.rodsbooks.com/gdisk/
@@ -15,14 +15,14 @@ LICENSE=		gnu-gpl-v2
 # HAS_CONFIGURE=		no
 USE_LANGUAGES=	c c++
 USE_LIBTOOL=	yes
-USE_TOOLS+=	gmake c++
+USE_TOOLS+=	gmake
 
 INSTALLATION_DIRS=	sbin ${PREFIX}/${PKGMANDIR}
 
 SBIN_FILES+=	gdisk cgdisk sgdisk fixparts
 MAN_FILES+=	gdisk.8 cgdisk.8 sgdisk.8 fixparts.8
 
-MAKE_PROGRAME=	gmake
+MAKE_PROGRAM=	gmake
 
 do-install:
 .for f in ${SBIN_FILES}
