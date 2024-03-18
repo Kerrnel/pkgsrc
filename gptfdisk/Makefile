@@ -1,9 +1,16 @@
 # $NetBSD$
 
-DISTNAME=	gptfdisk-1.0.9
+# History
+#	230317	1.0.10	Rod improved/accepted submitted 1.0.9 patches - remove and update
+#					pkglint says: NOTE: PLIST:2: PLIST files should use "man/" instead of "${PKGMANDIR}".
+#					But doing so - results in failure to find man files on install
+
+
+
+DISTNAME=	gptfdisk-1.0.10
 PKGREVISION=	1
 CATEGORIES=	sysutils
-MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=gptfdisk/1.0.9/}
+MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=gptfdisk/1.0.10/}
 # EXTRACT_SUFX=	.tar.gz
 
 MAINTAINER=		greg-org-netbsd@akua.com
