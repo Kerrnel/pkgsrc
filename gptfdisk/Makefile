@@ -10,7 +10,7 @@
 DISTNAME=	gptfdisk-1.0.10
 PKGREVISION=	1
 CATEGORIES=	sysutils
-MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=gptfdisk/1.0.10/}
+MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=gptfdisk/}
 # EXTRACT_SUFX=	.tar.gz
 
 MAINTAINER=		greg-org-netbsd@akua.com

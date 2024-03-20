@@ -3,3 +3,10 @@ $NetBSD$
 BLAKE2s (gptfdisk-1.0.10.tar.gz) = df0b252361d07e13de2fc4cda5360bb1f569d43bd73270c4f0d554c60635fe07
 SHA512 (gptfdisk-1.0.10.tar.gz) = 76764e176cd92470648a1d7a8d2570ebc41005204e73b0f2dd5a7aff2fc1981d3bec61a3bd68b855cc3474bcb7cf49c1cb2ea25843d4e7945bef7648d548383d
 Size (gptfdisk-1.0.10.tar.gz) = 220787 bytes
+SHA1 (patch-Makefile) = d9c31cd4016b01ad4b00a0b4b5884e1667ed7ad0
+SHA1 (patch-diskio-unix.cc) = 51fd2a5792e70c26e8381a3a3a144663bf187daf
+SHA1 (patch-gdisk.cc) = 0e3511e9e86e2b82c40b3a2ca4f190f0548150ec
+SHA1 (patch-gpt.cc) = 13ee3f9276c10a67560c53ac450cb1e2906f5f76
+SHA1 (patch-gpt.h) = 7f94dca6cfba3407bef7189abbc31fd08c24adbe
+SHA1 (patch-gptcl.cc) = 125c157bf89cd440fa0c0d22a2e565f7c1d01e07
+SHA1 (patch-gptcurses.cc) = b395cdbf684404d599e30844fbcafaf4ece65a91
