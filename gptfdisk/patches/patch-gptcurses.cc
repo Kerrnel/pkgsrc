@@ -1,10 +1,19 @@
 $NetBSD$
 
 Use inttypes.h for printing 64 bit numbers compatibly
+ncurses/ instead of ncursesw/ in NetBSD10
 
 --- gptcurses.cc.orig	2024-02-19 19:55:41.000000000 -0500
-+++ gptcurses.cc	2024-03-20 02:26:06.385671407 -0400
-@@ -30,6 +30,7 @@
++++ gptcurses.cc	2025-01-23 19:18:47.298098980 -0500
+@@ -23,13 +23,14 @@
+ #include <iostream>
+ #include <string>
+ #include <sstream>
+-#if defined (__APPLE__) || (__FreeBSD__)
++#if defined (__APPLE__) || (__FreeBSD__) || (__NetBSD__)
+ #include <ncurses.h>
+ #else
+ #include <ncursesw/ncurses.h>
  #endif
  #include "gptcurses.h"
  #include "support.h"

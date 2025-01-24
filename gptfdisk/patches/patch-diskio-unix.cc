@@ -1,10 +1,13 @@
 $NetBSD$
 
 Moved Add NetBSD to list of non-64-ending stat function OSes
+
+Auto change /dev/wd0 -> /dev/rwd0 since /dev/wd0 always returns ERRNO 16 on open
+
 (I think FreeBSD/OpenBSD as well ... but they have maintainers)
 
---- diskio-unix.cc.orig	2024-03-20 02:29:15.444855783 -0400
-+++ diskio-unix.cc	2024-03-20 02:31:28.663900580 -0400
+--- diskio-unix.cc.orig	2024-02-19 19:55:41.000000000 -0500
++++ diskio-unix.cc	2025-01-23 19:56:28.136385316 -0500
 @@ -37,7 +37,7 @@
  
  using namespace std;
@@ -14,40 +17,45 @@ Moved Add NetBSD to list of non-64-ending stat function OSes
  #define off64_t off_t
  #define stat64 stat
  #define fstat64 fstat
-@@ -261,7 +261,7 @@
- // (Note that for most OSes, the default of 0 is returned because I've not yet
- // looked into how to test for success in the underlying system calls...)
- int DiskIO::DiskSync(void) {
--   int i, retval = 0, platformFound = 0;
-+   int retval = 0, platformFound = 0;
- 
-    // If disk isn't open, try to open it....
-    if (!isOpen) {
-@@ -277,15 +277,15 @@
-                * it definitely will get things on disk though:
-                * http://topiks.org/mac-os-x/0321278542/ch12lev1sec8.html */
- #ifdef __sun__
--      i = ioctl(fd, DKIOCFLUSHWRITECACHE);
-+      int i = ioctl(fd, DKIOCFLUSHWRITECACHE);
- #else
--      i = ioctl(fd, DKIOCSYNCHRONIZECACHE);
-+      int i = ioctl(fd, DKIOCSYNCHRONIZECACHE);
+@@ -85,7 +85,7 @@
+          if (fstat64(fd, &st) == 0) {
+             if (S_ISDIR(st.st_mode))
+                cerr << "The specified path is a directory!\n";
+-#if !(defined(__FreeBSD__) || defined(__FreeBSD_kernel__)) \
++#if !(defined(__FreeBSD__) || defined(__FreeBSD_kernel__) || defined(__NetBSD__)) \
+                        && !defined(__APPLE__)
+             else if (S_ISCHR(st.st_mode))
+                cerr << "The specified path is a character device!\n";
+@@ -174,7 +174,7 @@
+       if (err == 0)
+           blockSize = minfo.dki_lbsize;
+ #endif
+-#if defined (__FreeBSD__) || defined (__FreeBSD_kernel__)
++#if defined (__FreeBSD__) || defined (__FreeBSD_kernel__) || defined(__NetBSD__)
+       err = ioctl(fd, DIOCGSECTORSIZE, &blockSize);
+ #endif
+ #ifdef __linux__
+@@ -283,11 +283,11 @@
  #endif
        platformFound++;
  #endif
- #if defined (__FreeBSD__) || defined (__FreeBSD_kernel__)
+-#if defined (__FreeBSD__) || defined (__FreeBSD_kernel__)
++#if defined (__FreeBSD__) || defined (__FreeBSD_kernel__) || defined (__NetBSD__)
        sleep(2);
 -      i = ioctl(fd, DIOCGFLUSH);
-+      int i = ioctl(fd, DIOCGFLUSH);
++      i = ioctl(fd, DIOCCACHESYNC);
        cout << "Warning: The kernel may continue to use old or deleted partitions.\n"
-            << "You should reboot or remove the drive.\n";
+-           << "You should reboot or remove the drive.\n";
++           << "You should reboot or remove the drive. (" << i << ")\n";
        platformFound++;
-@@ -293,7 +293,7 @@
+ #endif
  #ifdef __linux__
-       sleep(1); // Theoretically unnecessary, but ioctl() fails sometimes if omitted....
-       fsync(fd);
--      i = ioctl(fd, BLKRRPART);
-+      int i = ioctl(fd, BLKRRPART);
-       if (i) {
-          cout << "Warning: The kernel is still using the old partition table.\n"
-               << "The new table will be used at the next reboot or after you\n"
+@@ -460,7 +460,7 @@
+           sectors = minfo.dki_capacity;
+       platformFound++;
+ #endif
+-#if defined (__FreeBSD__) || defined (__FreeBSD_kernel__)
++#if defined (__FreeBSD__) || defined (__FreeBSD_kernel__) || defined(__NetBSD__)
+       *err = ioctl(fd, DIOCGMEDIASIZE, &bytes);
+       long long b = GetBlockSize();
+       sectors = bytes / b;
